@@ -20,55 +20,57 @@ export default function Login() {
     e.preventDefault();
     setLoading(true);
 
-    // Simulación de autenticación (reemplaza con tu lógica real)
     setTimeout(() => {
-      // Aquí puedes validar credenciales reales
-      // Por ahora, cualquier email y contraseña no vacía funciona
       if (email && password) {
-        // Guardar estado de sesión
         localStorage.setItem('isLoggedIn', 'true');
         localStorage.setItem('userEmail', email);
         if (rememberMe) {
           localStorage.setItem('rememberMe', 'true');
         }
-        
-        // Redirigir al dashboard
         navigate('/dashboard', { replace: true });
       } else {
         alert('Por favor ingresa email y contraseña');
         setLoading(false);
       }
-    }, 800); // Simula carga de red
+    }, 800);
   };
 
   return (
-    <div className="min-h-screen flex">
-      {/* Sección de Bienvenida (Lado Izquierdo) */}
-      <div className="w-full lg:w-1/2 bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 relative overflow-hidden">
-        {/* Formas abstractas circulares */}
+    <div className="min-h-screen flex flex-col lg:flex-row">
+      {/* Sección de Bienvenida - Solo en escritorio grande */}
+      <div className="hidden lg:block lg:w-1/2 bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 relative overflow-hidden">
         <div className="absolute top-20 left-10 w-64 h-64 bg-blue-500 rounded-full opacity-20 animate-pulse"></div>
         <div className="absolute bottom-20 right-10 w-80 h-80 bg-blue-400 rounded-full opacity-20"></div>
         <div className="absolute top-1/2 left-1/4 w-48 h-48 bg-blue-300 rounded-full opacity-15"></div>
         
         <div className="relative z-10 flex flex-col justify-center items-center h-full p-8 text-white">
-          <h1 className="text-5xl lg:text-6xl font-bold mb-8 text-center tracking-tight">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-center tracking-tight">
             BIENVENIDO
           </h1>
-          <h2 className="text-3xl lg:text-4xl font-semibold mb-6 text-center text-blue-100">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold mb-4 text-center text-blue-100">
             Cuadrantes de Paz
           </h2>
-          <p className="text-lg lg:text-xl text-center max-w-md leading-relaxed text-blue-50">
+          <p className="text-base md:text-lg lg:text-xl text-center max-w-md leading-relaxed text-blue-50 px-4">
             Sistema de monitoreo y coordinación territorial para la seguridad ciudadana en Maturín.
           </p>
         </div>
       </div>
 
-      {/* Formulario de Inicio de Sesión (Lado Derecho) */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-8 bg-gray-50">
+      {/* Formulario de Inicio de Sesión - Centrado en móvil, derecha en escritorio */}
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-4 md:p-8 bg-gray-50">
         <div className="w-full max-w-md">
-          <div className="bg-white rounded-2xl shadow-xl p-8 space-y-6">
+          <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 space-y-6">
+            {/* Logo/Ícono para móvil */}
+            <div className="lg:hidden text-center mb-6">
+              <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl text-white">👮</span>
+              </div>
+              <h1 className="text-2xl font-bold text-gray-800">Cuadrantes de Paz</h1>
+              <p className="text-gray-600 mt-1">Maturín, Monagas</p>
+            </div>
+
             <div className="text-center">
-              <h2 className="text-3xl font-bold text-gray-800 mb-2">Iniciar sesión</h2>
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2">Iniciar sesión</h2>
               <p className="text-gray-600">Ingresa tus credenciales para continuar</p>
             </div>
 
@@ -76,7 +78,7 @@ export default function Login() {
               {/* Campo de Correo */}
               <div>
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                  correo
+                  Correo electrónico
                 </label>
                 <input
                   type="email"
@@ -108,6 +110,7 @@ export default function Login() {
                     type="button"
                     onClick={togglePasswordVisibility}
                     className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-700 transition-colors"
+                    aria-label={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
                   >
                     {showPassword ? (
                       <EyeOff className="h-5 w-5" />
@@ -119,7 +122,7 @@ export default function Login() {
               </div>
 
               {/* Opciones Adicionales */}
-              <div className="flex items-center justify-between">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                 <div className="flex items-center">
                   <input
                     id="remember-me"
@@ -144,14 +147,14 @@ export default function Login() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg font-semibold text-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200 transform hover:scale-105 disabled:opacity-70 disabled:cursor-not-allowed"
+                className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg font-semibold text-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200 disabled:opacity-70 disabled:cursor-not-allowed"
               >
-                {loading ? 'Ingresando...' : 'Sign in'}
+                {loading ? 'Ingresando...' : 'Iniciar Sesión'}
               </button>
             </form>
 
             {/* Enlace de Registro */}
-            <div className="text-center mt-6">
+            <div className="text-center mt-6 pt-4 border-t border-gray-200">
               <p className="text-sm text-gray-600">
                 ¿No tienes una cuenta?{' '}
                 <a href="#" className="font-medium text-blue-600 hover:text-blue-500 transition-colors">
