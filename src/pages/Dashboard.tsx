@@ -39,7 +39,7 @@ export default function Dashboard() {
 
   // Datos simulados (sin cambios)
   const deviceData = [
-    { name: 'Computer', percentage: 75, color: 'bg-blue-500' },
+    { name: 'Computer', percentage: 75, color: 'bg-emerald-500' },
     { name: 'Smartphone', percentage: 65, color: 'bg-green-500' },
     { name: 'Tablet', percentage: 30, color: 'bg-purple-500' },
     { name: 'Smart TV', percentage: 15, color: 'bg-yellow-500' },
@@ -65,18 +65,18 @@ export default function Dashboard() {
   const RegistroCuadrante = () => <RegistroCuadrantesPaz/>;
   const UbicacionCuadrantes = () => <UbicacionCuadrantesPaz/>;
 
-  // Componente para la sección principal (Dashboard widgets) - con colores azules
+  // Componente para la sección principal (Dashboard widgets) - con colores VERDES
   const DashboardWidgets = () => (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
       {/* Widget 2: Dispositivos */}
-      <div className="bg-white rounded-xl shadow-sm border border-blue-100 p-6">
+      <div className="bg-white rounded-xl shadow-sm border border-emerald-100 p-6">
         <h3 className="text-lg font-semibold text-gray-800 mb-4">Dispositivos</h3>
         <div className="space-y-4">
           {deviceData.map((device) => (
             <div key={device.name} className="flex items-center justify-between">
               <span className="text-sm font-medium text-gray-700">{device.name}</span>
               <div className="flex items-center space-x-3">
-                <div className="w-24 bg-blue-100 rounded-full h-2">
+                <div className="w-24 bg-emerald-100 rounded-full h-2">
                   <div 
                     className={`h-2 rounded-full ${device.color}`} 
                     style={{ width: `${device.percentage}%` }}
@@ -90,7 +90,7 @@ export default function Dashboard() {
       </div>
 
       {/* Widget 3: Países */}
-      <div className="bg-white rounded-xl shadow-sm border border-blue-100 p-6">
+      <div className="bg-white rounded-xl shadow-sm border border-emerald-100 p-6">
         <h3 className="text-lg font-semibold text-gray-800 mb-4">Países</h3>
         <div className="space-y-3">
           {countryData.map((country) => (
@@ -106,7 +106,7 @@ export default function Dashboard() {
       </div>
 
       {/* Widget 4: Calendario */}
-      <div className="bg-white rounded-xl shadow-sm border border-blue-100 p-6">
+      <div className="bg-white rounded-xl shadow-sm border border-emerald-100 p-6">
         <h3 className="text-lg font-semibold text-gray-800 mb-4">Calendario</h3>
         <div className="text-center mb-4">
           <h4 className="font-bold text-gray-800">Enero 2024</h4>
@@ -123,7 +123,7 @@ export default function Dashboard() {
             <div 
               key={day} 
               className={`text-center text-sm py-1 rounded ${
-                day === 15 ? 'bg-blue-100 text-blue-700 font-medium' : 'text-gray-700 hover:bg-blue-50'
+                day === 15 ? 'bg-emerald-100 text-emerald-700 font-medium' : 'text-gray-700 hover:bg-emerald-50'
               }`}
             >
               {day}
@@ -133,15 +133,15 @@ export default function Dashboard() {
       </div>
 
       {/* Widget 5: Acceso Semanal */}
-      <div className="bg-white rounded-xl shadow-sm border border-blue-100 p-6 lg:col-span-2">
+      <div className="bg-white rounded-xl shadow-sm border border-emerald-100 p-6 lg:col-span-2">
         <h3 className="text-lg font-semibold text-gray-800 mb-4">Acceso Semanal</h3>
         <div className="flex overflow-x-auto pb-4 space-x-4">
           {weeklyAccessData.map((day, index) => (
             <div key={index} className="flex flex-col items-center min-w-16">
               <span className="text-xs text-gray-600 mb-2">{day.date}</span>
-              <div className="w-8 bg-blue-100 rounded-full">
+              <div className="w-8 bg-emerald-100 rounded-full">
                 <div 
-                  className="bg-blue-500 rounded-full" 
+                  className="bg-emerald-500 rounded-full" 
                   style={{ height: `${Math.min(day.value / 2, 80)}px` }}
                 ></div>
               </div>
@@ -189,7 +189,7 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="flex min-h-screen bg-blue-50">
+    <div className="flex min-h-screen bg-emerald-50">
       {/* Overlay para móvil */}
       {isMobile && isSidebarOpen && (
         <div 
@@ -198,21 +198,22 @@ export default function Dashboard() {
         />
       )}
 
-      {/* Sidebar - Menú de Navegación Principal (AZUL) */}
+      {/* Sidebar - Menú de Navegación Principal (VERDE) */}
+      {/* CAMBIO CLAVE: Eliminar h-screen y usar min-h-screen */}
       <div 
-        className={`fixed lg:static z-50 h-screen bg-gradient-to-b from-blue-700 to-blue-800 text-white transform transition-transform duration-300 ease-in-out ${
+        className={`fixed lg:static z-50 min-h-screen bg-gradient-to-b from-emerald-700 to-emerald-800 text-white transform transition-transform duration-300 ease-in-out ${
           isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
         } lg:translate-x-0 w-72`}
       >
-        <div className="p-6 border-b border-blue-600 flex justify-between items-center">
+        <div className="p-6 border-b border-emerald-600 flex justify-between items-center">
           <div>
             <h1 className="text-xl font-bold">Cuadrantes de Paz</h1>
-            <p className="text-blue-200 text-sm">Maturín, Monagas</p>
+            <p className="text-emerald-200 text-sm">Maturín, Monagas</p>
           </div>
           {isMobile && (
             <button
               onClick={() => setIsSidebarOpen(false)}
-              className="text-white hover:text-blue-200"
+              className="text-white hover:text-emerald-200"
             >
               <X size={24} />
             </button>
@@ -229,8 +230,8 @@ export default function Dashboard() {
                     onClick={() => handleSidebarItemClick(item.key)}
                     className={`w-full text-left flex items-center px-4 py-3 rounded-lg transition duration-200 ${
                       activeSection === item.key 
-                        ? 'bg-blue-600 text-white font-medium shadow-lg' 
-                        : 'text-blue-100 hover:bg-blue-600 hover:text-white'
+                        ? 'bg-emerald-600 text-white font-medium shadow-lg' 
+                        : 'text-emerald-100 hover:bg-emerald-600 hover:text-white'
                     }`}
                   >
                     <IconComponent size={20} className="mr-3" />
@@ -244,52 +245,48 @@ export default function Dashboard() {
       </div>
 
       {/* Área de Contenido Principal */}
-      <div className="flex-1 flex flex-col">
-        {/* Barra Superior - Búsqueda y Cerrar Sesión (AZUL) */}
-        {/* Barra Superior - Búsqueda y Cerrar Sesión (AZUL) */}
-      <header className="bg-white shadow-sm p-4 flex items-center border-b border-blue-100">
-        {/* Botón de menú para móviles */}
-        {isMobile && (
-          <button
-            onClick={() => setIsSidebarOpen(true)}
-            className="mr-4 text-blue-600 hover:text-blue-800 lg:hidden"
-          >
-            <Menu size={24} />
-          </button>
-        )}
-        
-        {/* Barra de búsqueda - responsive */}
-        <div className="relative flex-1 max-w-2xl">
-          <input
-            type="text"
-            placeholder="Buscar cuadrantes, sectores, incidentes..."
-            className="w-full pl-10 pr-4 py-2 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-          />
-          <div className="absolute left-3 top-2.5 text-blue-400">
-            🔍
+      <div className="flex-1 flex flex-col lg:ml-0">
+        {/* Barra Superior - Búsqueda y Cerrar Sesión (VERDE) */}
+        <header className="bg-white shadow-sm p-4 flex items-center border-b border-emerald-100">
+          {/* Botón de menú para móviles */}
+          {isMobile && (
+            <button
+              onClick={() => setIsSidebarOpen(true)}
+              className="mr-4 text-emerald-600 hover:text-emerald-800 lg:hidden"
+            >
+              <Menu size={24} />
+            </button>
+          )}
+          
+          {/* Barra de búsqueda - responsive */}
+          <div className="relative flex-1 max-w-2xl">
+            <input
+              type="text"
+              placeholder="Buscar cuadrantes, sectores, incidentes..."
+              className="w-full pl-10 pr-4 py-2 border border-emerald-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+            />
+            <div className="absolute left-3 top-2.5 text-emerald-400">
+              🔍
+            </div>
           </div>
-        </div>
-        
-        {/* Botón de Cerrar Sesión - MEJORADO Y RESPONSIVE */}
-        <div className="ml-4">
-          <button
-            onClick={handleLogout}
-            className="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 flex items-center group"
-            aria-label="Cerrar sesión"
-          >
-            {/* Ícono de Lucide React */}
-            <LogOut size={18} className="text-white" />
-            
-            {/* Texto solo en escritorio (min-w-768px) */}
-            <span className="ml-2 hidden md:inline font-medium">Cerrar Sesión</span>
-          </button>
-        </div>
-      </header>
+          
+          {/* Botón de Cerrar Sesión - MEJORADO Y RESPONSIVE */}
+          <div className="ml-4">
+            <button
+              onClick={handleLogout}
+              className="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 flex items-center group"
+              aria-label="Cerrar sesión"
+            >
+              <LogOut size={18} className="text-white" />
+              <span className="ml-2 hidden md:inline font-medium">Cerrar Sesión</span>
+            </button>
+          </div>
+        </header>
 
-        {/* Contenido Principal */}
-        <div className="flex-1 p-6 overflow-auto">
+        {/* Contenido Principal - SIN overflow-auto aquí */}
+        <main className="flex-1 p-4 md:p-6">
           {renderContent()}
-        </div>
+        </main>
       </div>
     </div>
   );

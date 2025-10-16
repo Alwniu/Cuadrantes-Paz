@@ -38,31 +38,32 @@ export default function Login() {
   return (
     <div className="min-h-screen flex flex-col lg:flex-row">
       {/* Sección de Bienvenida - Solo en escritorio grande */}
-      <div className="hidden lg:block lg:w-1/2 bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 relative overflow-hidden">
-        <div className="absolute top-20 left-10 w-64 h-64 bg-blue-500 rounded-full opacity-20 animate-pulse"></div>
-        <div className="absolute bottom-20 right-10 w-80 h-80 bg-blue-400 rounded-full opacity-20"></div>
-        <div className="absolute top-1/2 left-1/4 w-48 h-48 bg-blue-300 rounded-full opacity-15"></div>
+      <div className="hidden lg:block lg:w-1/2 bg-gradient-to-br from-emerald-600 via-emerald-700 to-emerald-800 relative overflow-hidden">
+        {/* Formas abstractas circulares en tonos verde */}
+        <div className="absolute top-20 left-10 w-64 h-64 bg-emerald-500 rounded-full opacity-20 animate-pulse"></div>
+        <div className="absolute bottom-20 right-10 w-80 h-80 bg-emerald-400 rounded-full opacity-20"></div>
+        <div className="absolute top-1/2 left-1/4 w-48 h-48 bg-emerald-300 rounded-full opacity-15"></div>
         
         <div className="relative z-10 flex flex-col justify-center items-center h-full p-8 text-white">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-center tracking-tight">
             BIENVENIDO
           </h1>
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold mb-4 text-center text-blue-100">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold mb-4 text-center text-emerald-100">
             Cuadrantes de Paz
           </h2>
-          <p className="text-base md:text-lg lg:text-xl text-center max-w-md leading-relaxed text-blue-50 px-4">
+          <p className="text-base md:text-lg lg:text-xl text-center max-w-md leading-relaxed text-emerald-50 px-4">
             Sistema de monitoreo y coordinación territorial para la seguridad ciudadana en Maturín.
           </p>
         </div>
       </div>
 
       {/* Formulario de Inicio de Sesión - Centrado en móvil, derecha en escritorio */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-4 md:p-8 bg-gray-50">
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-4 md:p-8 bg-emerald-50">
         <div className="w-full max-w-md">
           <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 space-y-6">
             {/* Logo/Ícono para móvil */}
             <div className="lg:hidden text-center mb-6">
-              <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-2xl text-white">👮</span>
               </div>
               <h1 className="text-2xl font-bold text-gray-800">Cuadrantes de Paz</h1>
@@ -85,7 +86,7 @@ export default function Login() {
                   id="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition duration-200"
                   placeholder="tu@correo.com"
                   required
                 />
@@ -102,7 +103,7 @@ export default function Login() {
                     id="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
+                    className="w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition duration-200"
                     placeholder="••••••••"
                     required
                   />
@@ -130,14 +131,14 @@ export default function Login() {
                     type="checkbox"
                     checked={rememberMe}
                     onChange={(e) => setRememberMe(e.target.checked)}
-                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                    className="h-4 w-4 text-emerald-600 focus:ring-emerald-500 border-gray-300 rounded"
                   />
                   <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700">
                     Recordarme
                   </label>
                 </div>
                 <div className="text-sm">
-                  <a href="#" className="font-medium text-blue-600 hover:text-blue-500 transition-colors">
+                  <a href="#" className="font-medium text-emerald-600 hover:text-emerald-700 transition-colors">
                     ¿Olvidaste la contraseña?
                   </a>
                 </div>
@@ -147,7 +148,7 @@ export default function Login() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg font-semibold text-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200 disabled:opacity-70 disabled:cursor-not-allowed"
+                className="w-full bg-emerald-600 text-white py-3 px-4 rounded-lg font-semibold text-lg hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 transition duration-200 disabled:opacity-70 disabled:cursor-not-allowed shadow-md hover:shadow-lg"
               >
                 {loading ? 'Ingresando...' : 'Iniciar Sesión'}
               </button>
@@ -157,7 +158,7 @@ export default function Login() {
             <div className="text-center mt-6 pt-4 border-t border-gray-200">
               <p className="text-sm text-gray-600">
                 ¿No tienes una cuenta?{' '}
-                <a href="#" className="font-medium text-blue-600 hover:text-blue-500 transition-colors">
+                <a href="#" className="font-medium text-emerald-600 hover:text-emerald-700 transition-colors">
                   Regístrate
                 </a>
               </p>
