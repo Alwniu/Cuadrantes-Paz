@@ -5,10 +5,19 @@ import 'leaflet/dist/leaflet.css';
 import { useCuadrantes } from '../../context/CuadrantesContext';
 
 export default function UbicacionCuadrantesPaz() {
+  const mapStyles = `
+    @media (max-width: 1023px) {
+      .leaflet-container {
+        z-index: 10 !important;
+      }
+    }
+  `;
+
   const mapRef = useRef<HTMLDivElement>(null);
   const { cuadrantes, eliminarCuadrante } = useCuadrantes();
   const mapInstance = useRef<L.Map | null>(null);
   const polygonsRef = useRef<Map<string, L.Polygon>>(new Map());
+  const connectionsRef = useRef<L.Polyline | null>(null);
 
   useEffect(() => {
     if (!mapRef.current) return;
@@ -25,7 +34,14 @@ export default function UbicacionCuadrantesPaz() {
     };
   }, []);
 
-  // Actualizar polígonos cuando cambien los cuadrantes
+  // Calcular el centro de un polígono
+  const getPolygonCenter = (coords: [number, number][]): [number, number] => {
+    const sumLat = coords.reduce((sum, coord) => sum + coord[0], 0);
+    const sumLng = coords.reduce((sum, coord) => sum + coord[1], 0);
+    return [sumLat / coords.length, sumLng / coords.length];
+  };
+
+  // Actualizar polígonos y conexiones cuando cambien los cuadrantes
   useEffect(() => {
     if (!mapInstance.current) return;
 
@@ -35,15 +51,27 @@ export default function UbicacionCuadrantesPaz() {
     });
     polygonsRef.current.clear();
 
-    // Agregar nuevos polígonos (más grandes y visibles)
+    // Limpiar conexiones anteriores
+    if (connectionsRef.current) {
+      mapInstance.current.removeLayer(connectionsRef.current);
+      connectionsRef.current = null;
+    }
+
+    const centers: [number, number][] = [];
+
+    // Agregar nuevos polígonos (más pequeños)
     cuadrantes.forEach(cuadrante => {
-      if (cuadrante.coordenadas.length >= 3) {
+      if (cuadrante.coordenadas.length >= 1) {
         const polygon = L.polygon(cuadrante.coordenadas as any, {
           color: '#D32F2F',
-          weight: 4, // Más grueso
+          weight: 1, // Más delgado
           fillColor: '#FF5252',
-          fillOpacity: 0.5 // Más opaco
+          fillOpacity: 0.1 // Menos opaco
         }).addTo(mapInstance.current!);
+
+        // Guardar centro para las conexiones
+        const center = getPolygonCenter(cuadrante.coordenadas);
+        centers.push(center);
 
         // Popup con botón de eliminación
         const popupContent = `
@@ -65,6 +93,26 @@ export default function UbicacionCuadrantesPaz() {
         polygonsRef.current.set(cuadrante.id, polygon);
       }
     });
+
+    // Crear conexiones entre todos los cuadrantes
+    if (centers.length > 1) {
+      // Conectar cada cuadrante con todos los demás (red completa)
+      const allConnections: [number, number][] = [];
+      
+      for (let i = 0; i < centers.length; i++) {
+        for (let j = i + 1; j < centers.length; j++) {
+          allConnections.push(centers[i], centers[j]);
+          
+          // Crear línea individual entre cada par
+          const connectionLine = L.polyline([centers[i], centers[j]], {
+            color: '#0066CC',
+            weight: 2,
+            opacity: 0.7,
+            dashArray: '5,5'
+          }).addTo(mapInstance.current!);
+        }
+      }
+    }
 
     // Centrar el mapa si hay cuadrantes
     if (cuadrantes.length > 0) {
@@ -92,6 +140,8 @@ export default function UbicacionCuadrantesPaz() {
   }, [eliminarCuadrante]);
 
   return (
+    <>
+    <style>{mapStyles}</style>
     <div className="p-4 md:p-6">
       <div className="max-w-4xl mx-auto">
         <div className="bg-white rounded-xl shadow-lg overflow-hidden">
@@ -147,5 +197,6 @@ export default function UbicacionCuadrantesPaz() {
         </div>
       </div>
     </div>
+    </>
   );
 }

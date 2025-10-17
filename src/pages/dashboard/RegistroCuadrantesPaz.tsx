@@ -53,6 +53,15 @@ const reverseGeocode = async (lat: number, lng: number): Promise<string> => {
 };
 
 export default function RegistroCuadrantesPaz() {
+
+  const mapStyles = `
+    @media (max-width: 1023px) {
+      .leaflet-container {
+        z-index: 10 !important;
+      }
+    }
+  `;
+
   const { agregarCuadrante } = useCuadrantes();
   const [formData, setFormData] = useState({
     nombre: '',
@@ -196,6 +205,8 @@ export default function RegistroCuadrantesPaz() {
   }
 
   return (
+    <>
+    <style>{mapStyles}</style>
     <div className="p-4 md:p-6">
       <div className="max-w-4xl mx-auto">
         <div className="bg-white rounded-xl shadow-lg overflow-hidden">
@@ -324,5 +335,6 @@ export default function RegistroCuadrantesPaz() {
         </div>
       </div>
     </div>
+    </>
   );
 }
