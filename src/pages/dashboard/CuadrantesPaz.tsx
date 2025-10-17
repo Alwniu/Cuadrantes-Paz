@@ -1,4 +1,4 @@
-// src/pages/dashboard/CuadrantesPaz.tsx
+// ...existing code...
 import { useEffect, useRef } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -17,7 +17,7 @@ export default function UbicacionCuadrantesPaz() {
   const { cuadrantes, eliminarCuadrante } = useCuadrantes();
   const mapInstance = useRef<L.Map | null>(null);
   const polygonsRef = useRef<Map<string, L.Polygon>>(new Map());
-  const connectionsRef = useRef<L.Polyline | null>(null);
+  const connectionsRef = useRef<L.LayerGroup | null>(null);
 
   useEffect(() => {
     if (!mapRef.current) return;
@@ -51,7 +51,7 @@ export default function UbicacionCuadrantesPaz() {
     });
     polygonsRef.current.clear();
 
-    // Limpiar conexiones anteriores
+    // Limpiar conexiones anteriores (si hay)
     if (connectionsRef.current) {
       mapInstance.current.removeLayer(connectionsRef.current);
       connectionsRef.current = null;
@@ -90,28 +90,27 @@ export default function UbicacionCuadrantesPaz() {
         `;
 
         polygon.bindPopup(popupContent);
-        polygonsRef.current.set(cuadrante.id, polygon);
+        polygonsRef.current.set(String(cuadrante.id), polygon);
       }
     });
 
-    // Crear conexiones entre todos los cuadrantes
+    // Crear conexiones entre todos los cuadrantes (si hay más de uno)
     if (centers.length > 1) {
-      // Conectar cada cuadrante con todos los demás (red completa)
-      const allConnections: [number, number][] = [];
-      
+      const lines: L.Polyline[] = [];
       for (let i = 0; i < centers.length; i++) {
         for (let j = i + 1; j < centers.length; j++) {
-          allConnections.push(centers[i], centers[j]);
-          
-          // Crear línea individual entre cada par
-          const connectionLine = L.polyline([centers[i], centers[j]], {
+          const line = L.polyline([centers[i], centers[j]], {
             color: '#0066CC',
             weight: 2,
             opacity: 0.7,
             dashArray: '5,5'
-          }).addTo(mapInstance.current!);
+          });
+          lines.push(line);
         }
       }
+      // Agrupar todas las líneas en una sola capa para poder eliminarlas fácilmente
+      const group = L.layerGroup(lines).addTo(mapInstance.current!);
+      connectionsRef.current = group;
     }
 
     // Centrar el mapa si hay cuadrantes
@@ -200,3 +199,4 @@ export default function UbicacionCuadrantesPaz() {
     </>
   );
 }
+// ...existing code...
