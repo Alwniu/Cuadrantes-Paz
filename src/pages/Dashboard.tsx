@@ -62,7 +62,7 @@ export default function Dashboard() {
 
   // Componentes de secciones (sin cambios)
   const RegistroIncidecias = () => <RegistrarIncidecias/>;
-  const RegistroCuadrante = () => <RegistroCuadrantesPaz/>;
+  const RegistroCuadrante1 = () => <RegistroCuadrantesPaz/>;
   const UbicacionCuadrantes = () => <UbicacionCuadrantesPaz/>;
 
   // Componente para la sección principal (Dashboard widgets) - con colores VERDES
@@ -89,7 +89,7 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* Widget 3: Países */}
+
       <div className="bg-white rounded-xl shadow-sm border border-emerald-100 p-6">
         <h3 className="text-lg font-semibold text-gray-800 mb-4">Países</h3>
         <div className="space-y-3">
@@ -105,7 +105,7 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* Widget 4: Calendario */}
+
       <div className="bg-white rounded-xl shadow-sm border border-emerald-100 p-6">
         <h3 className="text-lg font-semibold text-gray-800 mb-4">Calendario</h3>
         <div className="text-center mb-4">
@@ -132,7 +132,7 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* Widget 5: Acceso Semanal */}
+
       <div className="bg-white rounded-xl shadow-sm border border-emerald-100 p-6 lg:col-span-2">
         <h3 className="text-lg font-semibold text-gray-800 mb-4">Acceso Semanal</h3>
         <div className="flex overflow-x-auto pb-4 space-x-4">
@@ -158,7 +158,7 @@ export default function Dashboard() {
       case 'RegistroIncidencia':
         return <RegistroIncidecias/>;
       case 'RegistroPaz':
-        return <RegistroCuadrante />;
+        return <RegistroCuadrante1/>;
       case 'UbicacionCuadrantes':
         return <UbicacionCuadrantes/>;
       case 'GenerarReportes':
