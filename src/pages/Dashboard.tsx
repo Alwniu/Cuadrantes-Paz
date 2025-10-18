@@ -173,8 +173,8 @@ export default function Dashboard() {
   const menuItems = [
     { name: 'Inicio', key: 'inicio', icon: Home },
     { name: 'Gestionar Usuarios', key: 'GestionUsuario', icon: Users },
-    { name: 'Registrar Incidencias', key: 'RegistroIncidencia', icon: AlertTriangle },
     { name: 'Registrar Cuadrante de Paz', key: 'RegistroPaz', icon: MapPin },
+    { name: 'Registrar Incidencias', key: 'RegistroIncidencia', icon: AlertTriangle },
     { name: 'Ubicación Cuadrantes de Paz', key: 'UbicacionCuadrantes', icon: MapPin },
     { name: 'Reportes Estadísticos', key: 'GenerarReportes', icon: BarChart3 },
   ];
