@@ -68,7 +68,6 @@ export default function Dashboard() {
   // Componente para la sección principal (Dashboard widgets) - con colores VERDES
   const DashboardWidgets = () => (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-      {/* Widget 2: Dispositivos */}
       <div className="bg-white rounded-xl shadow-sm border border-emerald-100 p-6">
         <h3 className="text-lg font-semibold text-gray-800 mb-4">Dispositivos</h3>
         <div className="space-y-4">
@@ -155,6 +154,8 @@ export default function Dashboard() {
   // Renderizar el contenido según la sección activa
   const renderContent = () => {
     switch (activeSection) {
+      case 'GestionUsuario':
+        return <GestionUsuarios/>;
       case 'RegistroIncidencia':
         return <RegistroIncidecias/>;
       case 'RegistroPaz':
@@ -163,8 +164,6 @@ export default function Dashboard() {
         return <UbicacionCuadrantes/>;
       case 'GenerarReportes':
         return <GenerarReporteEstadistico/>;
-      case 'GestionUsuario':
-        return <GestionUsuarios/>;
       default:
         return <DashboardWidgets />;
     }
@@ -173,11 +172,11 @@ export default function Dashboard() {
   // Íconos actualizados con Lucide React
   const menuItems = [
     { name: 'Inicio', key: 'inicio', icon: Home },
-    { name: 'Registrar Cuadrante de Paz', key: 'RegistroPaz', icon: MapPin },
-    { name: 'Registrar Incidencias', key: 'RegistroIncidencia', icon: AlertTriangle },
-    { name: 'Reportes Estadísticos', key: 'GenerarReportes', icon: BarChart3 },
     { name: 'Gestionar Usuarios', key: 'GestionUsuario', icon: Users },
-    { name: 'Ubicación Cuadrantes de Paz', key: 'UbicacionCuadrantes', icon: MapPin }
+    { name: 'Registrar Incidencias', key: 'RegistroIncidencia', icon: AlertTriangle },
+    { name: 'Registrar Cuadrante de Paz', key: 'RegistroPaz', icon: MapPin },
+    { name: 'Ubicación Cuadrantes de Paz', key: 'UbicacionCuadrantes', icon: MapPin },
+    { name: 'Reportes Estadísticos', key: 'GenerarReportes', icon: BarChart3 },
   ];
 
   // Función para manejar clic en sidebar (cierra en móvil)
