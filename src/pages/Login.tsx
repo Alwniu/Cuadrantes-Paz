@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { Eye, EyeOff, Mail, Lock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import Cuadrantes from './../img/cuadrantes.png';
+import Cuadrantes from './../img/Cuadrantes.png';
 import Policia from './../img/Poli.jpeg';
 
 
